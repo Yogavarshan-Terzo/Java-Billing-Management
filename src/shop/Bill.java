@@ -50,7 +50,7 @@ public class Bill {
 
     @Override
     public String toString() {
-        return  "Bill\n" +
+        return  "Bill Receipt\n" +
                 "billId=" + billId +
                 "\t customerName='" + customerName + '\'' +
                 "\t Total Amount=" + billAmount +
