@@ -22,33 +22,8 @@ public class Shop {
         }
     }
 
-    public int getBillIdToFetch() throws Exception {
-            System.out.println("Enter Bill id to Fetch :");
-            int temp = scanner.nextInt();
-            if (temp < 1 || temp > bills.size()) {
-                throw new Exception("Invalid Bill Id");
-            }
-            return temp;
-        }
-        public int getBillIdToRemove() throws Exception{
-            System.out.println("Enter Bill id to Remove :");
-            int temp = scanner.nextInt();
-            if (temp < 1 || temp > bills.size()) {
-                throw new Exception("Invalid Bill Id");
-            }
-            return temp;
-        }
-    public int getOption() throws Exception {
-        System.out.println("Enter Any Option :");
-        int option = scanner.nextInt();
-        if (option < 1 || option > 4) {
-            throw new Exception("Invalid Option");
-        }
-        return option;
-    }
 
     public void run(){
-
         List<Item> itemsAvailable = new ArrayList<>();
         Collections.addAll(itemsAvailable,new Item(1,"Apple",10,50),
                                           new Item(2,"Mango",15, 20),
@@ -58,8 +33,12 @@ public class Shop {
         System.out.println("Welcome,Have a nice day");
         showMenu();
         int option = 1;
+        System.out.println("Enter Any Option :");
         try {
-            option = getOption();
+            option = scanner.nextInt();
+            if (option < 1 || option > 4) {
+                throw new IllegalArgumentException("Enter Valid Option!!!");
+            }
         }catch (Exception e){
             System.out.println(e.getMessage());
             run();
@@ -87,7 +66,11 @@ public class Shop {
                 break;
             case 2:
                     try{
-                            int billId = getBillIdToFetch();
+                            System.out.println("Enter Bill id to Fetch :");
+                            int billId = scanner.nextInt();
+                            if (billId < 1 || billId > bills.size()) {
+                                throw new IllegalArgumentException("Invalid Bill Id!!!");
+                            }
                             System.out.println(bills.get(billId-1).toString());
                             run();
                             break;
@@ -97,7 +80,11 @@ public class Shop {
                     }
             case 3:
                 try{
-                    int billId = getBillIdToRemove();
+                    System.out.println("Enter billId to Remove");
+                    int billId = scanner.nextInt();
+                    if(billId < 0 || billId > bills.size()){
+                        throw new IllegalArgumentException("Enter Valid Bill Id");
+                    }
                     bills.remove(billId-1);
                     System.out.println("Bill details removed successfully");
                     run();
